@@ -69,6 +69,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     public void onClick(DialogInterface dialog, int which) {
                         comment = input.getText().toString();
                         //helloTextView.setText(comment);
+
+                        Context context = getApplicationContext();
+                        Toast toast = Toast.makeText(context, comment, Toast.LENGTH_SHORT);
+                        toast.show();
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
