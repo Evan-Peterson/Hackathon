@@ -1,8 +1,10 @@
 package com.example.hanra.chatapp;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +19,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
 public class MainActivity extends AppCompatActivity {
-    //hello evan i want to seee if this works
 
     private String m_Text = "";
     private static final String TAG = "MainActivity";
@@ -67,7 +68,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-
+        Button btnMap = (Button) findViewById(R.id.btnMap);
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,
+                        MapActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public boolean isServicesOK(){
@@ -79,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "isServicesOK: Google Play Services is working");
             return true;
         } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
-            // error occured but resolvable (version err.)
+            // error occurred but resolvable (version err.)
             Log.d(TAG, "isServicesOK: an error occurred but can be fixed");
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this, available, ERROR_DIALOG_REQUEST);
             dialog.show();
