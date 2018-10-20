@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ChatApp</string>
     <string name="title_activity_pin">Map</string>
+    <string name="add_comment_button">Add Comment</string>
 </resources>
