@@ -22,6 +22,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -68,7 +69,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             LatLng gps = new LatLng(location.getLatitude(), location.getLongitude());
             mMap.addMarker(new MarkerOptions()
                     .position(gps)
-                    .title(userInput));
+                    .title(userInput)
+                    .snippet(userInput));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(gps, 12));
         }
     }
@@ -82,6 +84,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         final Button addCommentButton = (Button) findViewById(R.id.addCommentBtn);
         addCommentButton.setOnClickListener(new View.OnClickListener() {
+
+            public void onInfoWindowClick(Marker marker)
+            {
+                //todo
+            }
 
 
             public void onClick(View v) {

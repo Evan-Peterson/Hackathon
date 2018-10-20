@@ -105,9 +105,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
-    /*
-    public static String getString() {
-        return m_Text;
-    }
-    */
 }
