@@ -13,20 +13,26 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import static com.example.hanra.chatapp.R.string.*;
+
 public class MainActivity extends AppCompatActivity {
 
-    private String m_Text = "";
+    private static String m_Text = "test";
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final TextView helloTextView = (TextView) findViewById(R.id.info_text);
+        helloTextView.setText(m_Text);
 
         final Button addCommentButton = (Button) findViewById(R.id.addCommentButton);
         addCommentButton.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         m_Text = input.getText().toString();
+                        helloTextView.setText(m_Text);
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -62,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.show();
             }
         });
+        helloTextView.setText(m_Text);
         if (isServicesOK()) {
             init();
         }
@@ -97,4 +105,9 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+    /*
+    public static String getString() {
+        return m_Text;
+    }
+    */
 }
