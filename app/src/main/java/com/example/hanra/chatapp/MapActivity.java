@@ -62,13 +62,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private FusedLocationProviderClient mFusedLocationProviderClient;
     public static String comment = "";
 
-    private void drawMarker(Location location) {
+    private void drawMarker(Location location, String  userInput) {
         if (mMap != null) {
             mMap.clear();
             LatLng gps = new LatLng(location.getLatitude(), location.getLongitude());
             mMap.addMarker(new MarkerOptions()
                     .position(gps)
-                    .title("Current Position"));
+                    .title(userInput));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(gps, 12));
         }
     }
@@ -89,7 +89,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 Context context = MapActivity.this;
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Drop Comment");
-                drawMarker(currentLocation);
                 // Set up the input
 
                 final EditText input = new EditText(context);
@@ -102,6 +101,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         comment = input.getText().toString();
+                        drawMarker(currentLocation, input.getText().toString());
                         //helloTextView.setText(comment);
                         Context context = getApplicationContext();
                         Toast toast = Toast.makeText(context, comment, Toast.LENGTH_SHORT);
@@ -114,7 +114,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         dialog.cancel();
                     }
                 });
-
                 builder.show();
             }
         });
