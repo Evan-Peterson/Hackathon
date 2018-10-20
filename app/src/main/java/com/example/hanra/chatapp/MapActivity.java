@@ -31,6 +31,10 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.view.View;
+import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -79,6 +83,23 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        mMap.setInfoWindowAdapter(new InfoWindowAdapter() {
+
+                                     // Use default InfoWindow frame
+                                     @Override
+                                     public View getInfoWindow(Marker args) {
+                                         return null;
+                                     }
+
+                                     public View getInfoContents(Marker args) {
+                                        return null;
+                                        //todo
+                                     }
+
+                                     public void onInfoWindowClick(Marker marker) {
+                                         //toDo
+                                     }
+        });
 
         getLocationPermission();
 
