@@ -11,9 +11,19 @@
         android:id="@+id/btnMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/buttonmaplauncher"
+
         android:text="@string/map_button"
+        android:textAllCaps="false"
         android:textColor="@color/colorAccent"
+
+        android:background="@drawable/buttonmaplauncher"
+
+        android:shadowColor="#000000"
+        android:shadowDx="2.0"
+        android:shadowDy="3.0"
+        android:shadowRadius="2.0"
+
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
