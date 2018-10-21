@@ -14,9 +14,8 @@
 
         android:background="@drawable/buttonmaplauncher"
         android:shadowColor="#000000"
-        android:shadowDx="2.0"
-
-        android:shadowDy="3.0"
+        android:shadowDx="5.0"
+        android:shadowDy="5.0"
 
         android:shadowRadius="2.0"
         android:text="@string/map_button"
