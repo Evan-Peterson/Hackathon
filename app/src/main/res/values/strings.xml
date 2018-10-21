@@ -2,7 +2,7 @@
     <string name="app_name">ChatApp</string>
     <string name="title_activity_pin">Map</string>
     <string name="add_comment_button">Add Comment</string>
-    <string name="map_button">btnMap</string>
+    <string name="map_button">Go To Map!</string>
     <string name="like_button">Like</string>
     <string name="add_comment_map_button">Add Comment</string>
 </resources>
