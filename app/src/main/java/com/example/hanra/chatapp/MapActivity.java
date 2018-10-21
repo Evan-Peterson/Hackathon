@@ -76,16 +76,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         if (mMap != null) {
             mMap.clear();
             LatLng gps = new LatLng(location.getLatitude(), location.getLongitude());
-            String[] message = userInput.split(" ");
+            char[] message = userInput.toCharArray();
             String comment = userInput;
-            if(message.length >  5) {
+            int maxLength = 15;
+            if(message.length >  maxLength) {
                 comment = "";
-                for(int i = 0;i < 5;i++) {
+                for(int i = 0;i < maxLength;i++) {
                     comment += message[i];
-                    if(i == 4) {
+                    if(i == maxLength - 1) {
                         comment += "...";
-                    } else {
-                        comment += " ";
                     }
                 }
             }
