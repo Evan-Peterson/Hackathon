@@ -76,10 +76,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         if (mMap != null) {
             mMap.clear();
             LatLng gps = new LatLng(location.getLatitude(), location.getLongitude());
+            String[] message = userInput.split(" ");
+            String comment = userInput;
+            if(message.length >  5) {
+                comment = "";
+                for(int i = 0;i < 5;i++) {
+                    comment += message[i];
+                    if(i == 4) {
+                        comment += "...";
+                    } else {
+                        comment += " ";
+                    }
+                }
+            }
             mMap.addMarker(new MarkerOptions()
                     .position(gps)
-                    .title(userInput)
-                    .snippet(userInput));
+                    .title(comment));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(gps, 12));
         }
     }
