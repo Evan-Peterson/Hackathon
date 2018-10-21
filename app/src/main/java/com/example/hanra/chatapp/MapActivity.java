@@ -33,8 +33,12 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.view.View;
+import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
+import java.util.HashMap;
+import java.util.Map;
+
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -55,7 +59,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
 
         mMap = googleMap;
-
+        mMap.setOnInfoWindowClickListener(this);
         if (mLocationPermissionGranted) {
             getDeviceLocation();
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -66,6 +70,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
         }
+    }
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Toast.makeText(this, "Info window clicked",
+                Toast.LENGTH_SHORT).show();
     }
 
     private static Location currentLocation = null;
@@ -83,28 +92,34 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         if (mMap != null) {
             mMap.clear();
             LatLng gps = new LatLng(location.getLatitude(), location.getLongitude());
+            char[] message = userInput.toCharArray();
+            String comment = userInput;
+            int maxLength = 15;
+            if(message.length >  maxLength) {
+                comment = "";
+                for(int i = 0;i < maxLength;i++) {
+                    comment += message[i];
+                    if(i == maxLength - 1) {
+                        comment += "...";
+                    }
+                }
+            }
             mMap.addMarker(new MarkerOptions()
                     .position(gps)
-                    .title(userInput)
-                    .snippet(userInput));
+                    .title(comment));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(gps, 12));
         }
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
         getLocationPermission();
 
         final Button addCommentButton = (Button) findViewById(R.id.addCommentBtn);
         addCommentButton.setOnClickListener(new View.OnClickListener() {
-
-            public void onInfoWindowClick(Marker marker)
-            {
-                //todo
-            }
 
 
             public void onClick(View v) {
