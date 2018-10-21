@@ -36,14 +36,14 @@ import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "onMapReady: map is ready");
         mMap = googleMap;
-
+        mMap.setOnInfoWindowClickListener(this);
         if (mLocationPermissionGranted) {
             getDeviceLocation();
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -54,6 +54,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
         }
+    }
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Toast.makeText(this, "Info window clicked",
+                Toast.LENGTH_SHORT).show();
     }
 
     private static Location currentLocation = null;
@@ -81,35 +86,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        mMap.setInfoWindowAdapter(new InfoWindowAdapter() {
-
-                                     // Use default InfoWindow frame
-                                     @Override
-                                     public View getInfoWindow(Marker args) {
-                                         return null;
-                                     }
-
-                                     public View getInfoContents(Marker args) {
-                                        return null;
-                                        //todo
-                                     }
-
-                                     public void onInfoWindowClick(Marker marker) {
-                                         //toDo
-                                     }
-        });
-
         getLocationPermission();
 
         final Button addCommentButton = (Button) findViewById(R.id.addCommentBtn);
         addCommentButton.setOnClickListener(new View.OnClickListener() {
-
-            public void onInfoWindowClick(Marker marker)
-            {
-                //todo
-            }
 
 
             public void onClick(View v) {
